@@ -5,8 +5,8 @@ const base = require("./webpack.base.config");
 module.exports = env => {
   return merge(base(env), {
     entry: {
-      background: "./src/background.js",
-      app: "./src/app.js"
+      background: "./src/metal.js",
+      app: "./src/chrome.js"
     },
     output: {
       filename: "[name].js",

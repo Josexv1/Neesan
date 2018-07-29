@@ -3,18 +3,18 @@
 // It doesn't have any windows which you can see on screen, but we can open
 // window from here.
 
-import path from "path";
-import url from "url";
 import { app, Menu } from "electron";
-import { devMenuTemplate } from "./menu/dev_menu_template";
-import { editMenuTemplate } from "./menu/edit_menu_template";
-import { issueMenu } from './menu/issue_menu';
-import createWindow from "./helpers/window";
-const cfg = require('./helpers/config');
-
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
 import env from "env";
+import path from "path";
+import url from "url";
+import * as _app from './helpers/config';
+import createWindow from "./helpers/window";
+import { devMenuTemplate } from "./menu/dev_menu_template";
+import { editMenuTemplate } from "./menu/edit_menu_template";
+import { issueMenu } from './menu/issue_menu';
+
 
 const setApplicationMenu = () => {
   const menus = [editMenuTemplate, issueMenu];
@@ -35,16 +35,16 @@ if (env.name !== "production") {
 app.on("ready", () => {
   setApplicationMenu();
 
-  if (cfg.app.height === '') {
-    cfg.app.height = 1000;
-    cfg.app.width = 600;
+  if (_app.height === '') {
+    _app.height = 1000;
+    _app.width = 600;
   }
 
   const mainWindow = createWindow("main", {
-    width: cfg.app.width,
-    height: cfg.app.height,
-    minWidth: 600,
-    minHeight: 800
+    width: _app.width,
+    height: _app.height,
+    minWidth: 955,
+    minHeight: 740
   });
 
   mainWindow.loadURL(
